@@ -13,6 +13,21 @@ Page({
      */
     onLoad: function(options) {
         console.log('加载完毕')
+            //获取经纬度
+        wx.getLocation({
+            type: 'wgs84',
+            altitude: false,
+            success: (result) => {
+                console.log('res->', result)
+            },
+            fail: () => {
+                console.log('获取失败')
+            },
+            complete: () => {
+                console.log('获取完程')
+            }
+        });
+
     },
 
     /**
