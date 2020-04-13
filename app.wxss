@@ -1,0 +1,6 @@
+/**app.wxss**/
+
+page {
+    /* 统一默认字体 */
+    font-size: 26rpx;
+}
