@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        movies: []
     },
     getCityStr: function(success) {
         wx.getLocation({
@@ -62,8 +62,11 @@ Page({
             dataType: 'json',
             responseType: 'text',
             success: (result) => {
+                // 电影信息
                 console.log('res->', result)
-                    // common
+                this.setData({
+                    movies: result.data.subjects
+                })
             },
             fail: () => {
                 console.log('失败')
