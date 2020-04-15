@@ -64,8 +64,12 @@ Page({
             success: (result) => {
                 // 电影信息
                 console.log('res->', result)
+                let movies = result.data.subjects
+                for (const index in movies) {
+                    this.updateMovie(movies[index])
+                }
                 this.setData({
-                    movies: result.data.subjects
+                    movies: movies
                 })
             },
             fail: () => {
@@ -76,6 +80,19 @@ Page({
             }
         });
 
+    },
+
+    updateMovie: function(movie) {
+        console.log(movie)
+        let stars = parseInt(movie.rating.stars)
+        if (stars == 0) { return }
+        let onStar = parseInt(stars / 10)
+        let halfStar = parseInt(stars % 10) > 0
+        let offStar = parseInt((50 - stars) / 10)
+        movie.stars = {}
+        movie.stars.onStar = onStar
+        movie.stars.halfStar = halfStar
+        movie.stars.offStar = offStar
     },
     /**
      * 生命周期函数--监听页面加载
