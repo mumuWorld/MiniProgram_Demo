@@ -10,7 +10,7 @@
         <view class="scroll-item" wx:for="{{allMovies}}" wx:key="unique">
             <view class="item-header">
                 <view class="title">{{item.title}}</view>
-                <view class="click-more">
+                <view class="click-more" data-index="{{index}}" data-url="{{item.url}}" data-title="{{item.title}}" bind:tap="clickMore">
                     查看更多
                     <view class="arrow"></view>
                 </view>

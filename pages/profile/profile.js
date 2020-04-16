@@ -30,10 +30,11 @@ Page({
     },
 
     begin: function(evt) {
-        var index = evt.currentTarget.dataSet.index
+        console.log('开启', evt)
+
+        var index = evt.currentTarget.dataset.index
 
         console.log('开启', evt.currentTarget.id, 'index-', index)
-        console.log('开启', evt)
     }
 
 
