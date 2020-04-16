@@ -3,19 +3,22 @@ App({
     onLaunch: function() {
         wx.db = {}
         wx.db.toast = function(title) {
-                wx.showToast({
-                    title: title,
-                    icon: 'none',
-                    // image: '/assets/imgs/upsdk_cancel_normal.png',
-                    duration: 1500,
-                    mask: false,
-                    success: (result) => {
+            wx.showToast({
+                title: title,
+                icon: 'none',
+                // image: '/assets/imgs/upsdk_cancel_normal.png',
+                duration: 1500,
+                mask: false,
+                success: (result) => {
 
-                    },
-                    fail: () => {},
-                    complete: () => {}
-                });
+                },
+                fail: () => {},
+                complete: () => {}
+            });
 
+        }
+        wx.db.url = (url) => {
+                return 'https://douban.uieee.com/' + url
             }
             // 展示本地存储能力
         var logs = wx.getStorageSync('logs') || []

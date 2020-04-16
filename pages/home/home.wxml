@@ -7,24 +7,24 @@
         </view>
     </view>
     <view class="scroll-wrapper">
-        <view class="scroll-item">
+        <view class="scroll-item" wx:for="{{allMovies}}" wx:key="unique">
             <view class="item-header">
-                <view class="title">影院热映</view>
+                <view class="title">{{item.title}}</view>
                 <view class="click-more">
                     查看更多
                     <view class="arrow"></view>
                 </view>
             </view>
             <scroll-view class="items" scroll-x="{{true}}">
-                <view class="item" wx:for="{{movies}}" wx:for-item="movie">
+                <view class="item" wx:for="{{item.movies}}" wx:key="unique" wx:for-item="movie">
                     <image class="movie-image" src="{{ movie.images.small }}"></image>
                     <view class="movie-title">{{ movie.title }}</view>
                     <view class="movie-score-wrapper">
                         <block wx:if="{{movie.stars}}">
                             <view class="stars">
-                                <image class="star" wx:for="{{ movie.stars.onStar }}" wx:for-item src="/assets/imgs/rating_star_small_on.png" />
-                                <image class="star" wx:if="{{ movie.stars.halfStar }}" wx:for-item src="/assets/imgs/rating_star_small_half.png" />
-                                <image class="star" wx:for="{{ movie.stars.offStar }}" wx:for-item src="/assets/imgs/rating_star_small_off.png" />
+                                <image class="star" wx:for="{{ movie.stars.onStar }}" wx:key="unique"  src="/assets/imgs/rating_star_small_on.png" />
+                                <image class="star" wx:if="{{ movie.stars.halfStar }}" src="/assets/imgs/rating_star_small_half.png" />
+                                <image class="star" wx:for="{{ movie.stars.offStar }}" wx:key="unique" src="/assets/imgs/rating_star_small_off.png" />
                             </view>
                             <view class="score-title">{{movie.rating.average}}</view>
                         </block>

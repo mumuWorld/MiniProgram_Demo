@@ -5,8 +5,35 @@ Page({
      * 页面的初始数据
      */
     data: {
-        movies: []
+        // 所有数据
+        allMovies: [{
+                title: '影院热映',
+                movies: [],
+                url: '/v2/movie/in_theaters'
+            },
+            {
+                title: '豆瓣新片榜',
+                movies: [],
+                url: '/v2/movie/new_movies'
+            },
+            {
+                title: '口碑榜',
+                movies: [],
+                url: '/v2/movie/weekly'
+            },
+            {
+                title: '北美票房榜',
+                movies: [],
+                url: '/v2/movie/us_box'
+            },
+            {
+                title: 'Top250',
+                movies: [],
+                url: 'v2/movie/top250'
+            },
+        ]
     },
+    // 获取城市逆地理
     getCityStr: function(success) {
         wx.getLocation({
             type: 'wgs84',
@@ -49,41 +76,9 @@ Page({
 
 
     },
-    getNewMovies: function(city) {
-        var baseUrl = 'https://douban.uieee.com'
-        let new_movies = '/v2/movie/in_theaters'
-        var reqTask = wx.request({
-            url: baseUrl + new_movies,
-            data: {
-                city: city
-            },
-            header: { 'content-type': 'json' },
-            method: 'GET',
-            dataType: 'json',
-            responseType: 'text',
-            success: (result) => {
-                // 电影信息
-                console.log('res->', result)
-                let movies = result.data.subjects
-                for (const index in movies) {
-                    this.updateMovie(movies[index])
-                }
-                this.setData({
-                    movies: movies
-                })
-            },
-            fail: () => {
-                console.log('失败')
-            },
-            complete: () => {
-                console.log('完成')
-            }
-        });
 
-    },
-
+    // 更新电影星级数据
     updateMovie: function(movie) {
-        console.log(movie)
         let stars = parseInt(movie.rating.stars)
         if (stars == 0) { return }
         let onStar = parseInt(stars / 10)
@@ -100,16 +95,86 @@ Page({
     onLoad: function(options) {
         console.log('加载完毕')
         wx.db.toast('正在获取当前上映电影')
+        this.loadLocalCache()
             //获取经纬度
-        this.getCityStr((city) => {
-            console.log('city=', city)
-            this.getNewMovies(city)
-        })
-
+            // this.getCityStr((city) => {
+            //     console.log('city=', city)
+            //         // this.getNewMovies(city)
+            //     this.requestMovies(0, { city: city })
+            // })
+            // this.requestMovies(1);
+            // this.requestMovies(2);
+            // this.requestMovies(3);
+            // this.requestMovies(4);
+    },
+    // 请求电影数据
+    requestMovies: function(index, params) {
+        let obj = this.data.allMovies[index]
+        let new_movies = wx.db.url(obj.url)
+        let reqTask = wx.request({
+            url: new_movies,
+            data: params,
+            header: { 'content-type': 'json' },
+            method: 'GET',
+            dataType: 'json',
+            responseType: 'text',
+            success: (result) => {
+                console.log('res->', result)
+                    // 电影信息
+                const movies = result.data.subjects
+                for (let index = 0; index < movies.length; index++) {
+                    // js神奇语法
+                    let movie = movies[index].subject || movies[index];
+                    this.updateMovie(movie)
+                    obj.movies.push(movie)
+                }
+                this.setData(this.data)
+                wx.setStorage({
+                    key: obj.url,
+                    data: obj.movies,
+                    success: (result) => {
+                        console.log(`${obj.title}缓存成功,`, result)
+                    },
+                    fail: () => {},
+                    complete: () => {}
+                });
+            },
+            fail: () => {
+                wx.db.onShow(`获取 ${ obj.title } 失败`)
+                console.log(`获取 ${ obj.title } 失败`)
+            },
+            complete: () => {
+                console.log(`获取 ${ obj.title } 完成`)
+            }
+        });
     },
 
-
-
+    loadLocalCache: function() {
+        for (let index = 0; index < this.data.allMovies.length; index++) {
+            const obj = this.data.allMovies[index]
+            wx.getStorage({
+                key: obj.url,
+                success: (result) => {
+                    console.log(result)
+                    console.log(`获取 ${ obj.title } 缓存成功`)
+                    obj.movies = result.data
+                    this.setData(this.data)
+                },
+                fail: () => {
+                    if (index == 0) {
+                        this.getCityStr((city) => {
+                            console.log('city=', city)
+                            this.requestMovies(index, { city: city })
+                        })
+                    } else {
+                        this.requestMovies(index)
+                    }
+                },
+                complete: () => {}
+            });
+        }
+        this.setData(this.data)
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
