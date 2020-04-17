@@ -1,5 +1,5 @@
 <!--cmps/movie-item/movie-item.wxml-->
-<view class="item">
+<view class="item" bind:tap="showDetail" data-movie="{{movie}}">
 	<image class="movie-image" src="{{ movie.images.small }}"></image>
 	<view class="movie-title">{{ movie.title }}</view>
 	<view class="movie-score-wrapper">

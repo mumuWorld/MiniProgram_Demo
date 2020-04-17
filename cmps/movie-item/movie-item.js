@@ -29,6 +29,18 @@ Component({
      * 组件的方法列表
      */
     methods: {
+        showDetail: function() {
+            const json = JSON.stringify(self.properties.movie)
+            const obj = JSON.parse(json)
+            wx.navigateTo({
+                url: '/pages/detail/detail',
+                success: (result) => {
 
+                },
+                fail: () => {},
+                complete: () => {}
+            });
+
+        }
     }
 })
