@@ -74,45 +74,8 @@
     overflow-x: auto; */
     white-space: nowrap;
     margin-bottom: 20rpx;
-    height: 382rpx;
 }
 
-.items .item {
+.item {
     margin: 0 15rpx;
-    /* display: inline-block; */
-    display: inline-flex;
-    flex-direction: column;
-    width: 210rpx;
-}
-
-.item .movie-image {
-    width: 100%;
-    height: 301rpx;
-    border-radius: 20rpx;
-}
-
-.item .movie-title {
-    width: 100%;
-    font-size: 30rpx;
-    font-weight: bold;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.item .stars {
-    display: flex;
-}
-
-.stars .star {
-    width: 24rpx;
-    height: 24rpx;
-}
-
-.item .movie-score-wrapper {
-    display: flex;
-    align-items: center;
-}
-
-.movie-score-wrapper .score-title {
-    margin-left: 20rpx;
 }

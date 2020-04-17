@@ -1,23 +1,6 @@
 <!-- pages/list/list.wxml -->
 <view class="container">
     <view class="item" wx:for="{{movies}}" wx:key="unique" wx:for-item="movie">
-        <image class="movie-image" src="{{ movie.images.small }}"></image>
-        <view class="movie-title">{{ movie.title }}</view>
-        <view class="movie-score-wrapper">
-            <block wx:if="{{movie.stars}}">
-                <view class="stars">
-                    <image class="star" wx:for="{{ movie.stars.onStar }}" wx:key="unique" src="/assets/imgs/rating_star_small_on.png" />
-                    <image class="star" wx:if="{{ movie.stars.halfStar }}" src="/assets/imgs/rating_star_small_half.png" />
-                    <image class="star" wx:for="{{ movie.stars.offStar }}" wx:key="unique" src="/assets/imgs/rating_star_small_off.png" />
-                </view>
-                <view class="score-title">{{movie.rating.average}}</view>
-            </block>
-            <block wx:else>暂无评分</block>
-        </view>
-    </view>
-    <view class="item hidden" wx:for="{{((movies.length % 3) > 0 ? 3 - (movies.length % 3) : 0)}}" wx:key="unique">
-        <image class="movie-image"/>
-        <view class="movie-title"/>
-        <view class="movie-score-wrapper"/>
+        <movie-item class="items" movie="{{movie}}" />
     </view>
 </view>
