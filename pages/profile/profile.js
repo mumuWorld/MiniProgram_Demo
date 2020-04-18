@@ -31,10 +31,19 @@ Page({
 
     begin: function(evt) {
         console.log('开启', evt)
-
         var index = evt.currentTarget.dataset.index
-
         console.log('开启', evt.currentTarget.id, 'index-', index)
+    },
+
+    login: function(events) {
+        console.log('登录')
+        wx.navigateTo({
+          url: '/pages/login/login',
+          complete: (res) => {},
+          events: events,
+          fail: (res) => {},
+          success: (result) => {},
+        })
     }
 
 
