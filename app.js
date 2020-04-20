@@ -25,14 +25,21 @@ App({
             // logs.unshift(Date.now())
             // wx.setStorageSync('logs', logs)
         wx.setNavigationBarColor({
-                frontColor: '#ffffff',
-                backgroundColor: '#42bd55',
-                animation: {
-                    duration: 400,
-                    timingFunc: 'easeIn'
-                }
-            })
-            // 登录
+            frontColor: '#ffffff',
+            backgroundColor: '#42bd55',
+            animation: {
+                duration: 400,
+                timingFunc: 'easeIn'
+            }
+        })
+        wx.db.appInfo = wx.getSystemInfoSync();
+        wx.db.statusBarHeight = wx.db.appInfo.statusBarHeight
+        if (wx.db.appInfo.platform == 'android') {
+            wx.db.navBarHeight = 48
+        } else {
+            wx.db.navBarHeight = 44
+        }
+        // 登录
         wx.login({
                 success: res => {
                     // 发送 res.code 到后台换取 openId, sessionKey, unionId

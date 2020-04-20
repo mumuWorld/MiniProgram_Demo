@@ -10,7 +10,7 @@
 }
 
 .search {
-    background-color: bisque;
+    background-color: #fff;
     border-radius: 10rpx;
     display: flex;
     align-items: center;

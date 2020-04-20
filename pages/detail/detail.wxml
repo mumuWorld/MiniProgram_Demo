@@ -1,2 +1,3 @@
 <!--pages/detail/detail.wxml-->
-<text>pages/detail/detail.wxml</text>
+<nav-bar class="nav-bar" title="详细" navBarColor="#42bd55" statuBarColor="#42bd55" ></nav-bar>
+

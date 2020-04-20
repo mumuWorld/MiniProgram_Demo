@@ -1,6 +1,8 @@
 {
     "navigationBarTitleText": "首页",
+    "navigationStyle": "custom",
     "usingComponents": {
-        "movie-item": "/cmps/movie-item/movie-item"
+        "movie-item": "/cmps/movie-item/movie-item",
+        "nav-bar": "/cmps/navigation-bar/navigation-bar"
     }
 }

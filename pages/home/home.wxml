@@ -1,4 +1,5 @@
 <!-- pages/home/home.wxml -->
+<nav-bar class="nav-bar" title="首页" navBarColor="#42bd55" statuBarColor="#42bd55" home="false" back='false'></nav-bar>
 <view class="container">
     <view class="search-wrapper">
         <view class="search">

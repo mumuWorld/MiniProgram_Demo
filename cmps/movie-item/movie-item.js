@@ -30,7 +30,7 @@ Component({
      */
     methods: {
         showDetail: function() {
-            const json = JSON.stringify(self.properties.movie)
+            const json = JSON.stringify(this.data.movie)
             const obj = JSON.parse(json)
             wx.navigateTo({
                 url: '/pages/detail/detail',

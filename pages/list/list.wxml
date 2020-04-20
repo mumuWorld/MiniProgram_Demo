@@ -1,4 +1,6 @@
 <!-- pages/list/list.wxml -->
+<nav-bar class="nav-bar" title="首页" navBarColor="#42bd55" statuBarColor="#42bd55" ></nav-bar>
+
 <view class="container">
     <view class="item" wx:for="{{movies}}" wx:key="unique" wx:for-item="movie">
         <movie-item class="items" movie="{{movie}}" />
